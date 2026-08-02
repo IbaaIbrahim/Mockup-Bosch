@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
+// One way in to the dashboard — the dark card wall. Table and Mobile are
+// reached from the mode switcher in its top-right corner, not from here.
 const LINKS = [
-  { href: '/board', title: 'Dashboard — Board', description: 'Dark, live wall-display view. What goes on the projector.' },
-  { href: '/table', title: 'Dashboard — Table', description: 'Dense, sortable, filterable analyst view.' },
-  { href: '/mobile', title: 'Dashboard — Mobile', description: 'Self-service parcel lookup.' },
+  { href: '/board', title: 'Parcel Status Dashboard', description: 'Dark card wall. Table and Mobile views via the switcher, top right.' },
   { href: '/inbound', title: 'Inbound Registration', description: 'Scan → identify → propose → verify → store.' },
   { href: '/ops', title: 'Ops Console', description: 'Event feed, health, admin, reset.' },
 ];

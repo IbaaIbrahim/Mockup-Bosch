@@ -10,8 +10,21 @@ import { useRouter } from 'next/navigation';
 import { Scanner } from '../../../design/components/Scanner';
 import { StateWash } from '../../../design/components/StateWash';
 import { Button } from '../../../design/components/Button';
+import type { DemoShortcut } from '../../../design/components/DemoShortcuts';
 
 const CARRIERS = ['DHL', 'UPS', 'GLS', 'Amazon'];
+
+/**
+ * Stage aids only — both values take the ordinary /api/inbound/validate path
+ * and are judged by the engine's carrier patterns, exactly like a camera scan.
+ * "xyzsweg222" matches no active pattern → Invalid Format!.
+ * "JD1234567890123456" satisfies DHL's ^JD[0-9]{16}$ and is not in the seed,
+ * so it is a clean first registration rather than a duplicate.
+ */
+const SCAN_EXAMPLES: DemoShortcut[] = [
+  { label: 'Invalid label', value: 'xyzsweg222', tone: 'unhappy' },
+  { label: 'Valid DHL label', value: 'JD1234567890123456', tone: 'happy' },
+];
 
 interface ValidateResponse {
   valid: boolean;
@@ -127,6 +140,7 @@ export function ScanScreen({
         manualLabel="Enter manually"
         manualPlaceholder="e.g. JD0123456789012345"
         onDetect={handleDetect}
+        demoShortcuts={SCAN_EXAMPLES}
       />
 
       {pending && <span style={{ textAlign: 'center', color: 'var(--content-secondary)' }}>Checking…</span>}

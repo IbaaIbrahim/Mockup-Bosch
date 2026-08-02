@@ -16,12 +16,18 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
+import { DemoShortcuts, type DemoShortcut } from './DemoShortcuts';
 
 export interface ScannerProps {
   instruction: string;
   manualLabel: string;
   manualPlaceholder: string;
   onDetect: (raw: string) => void;
+  /**
+   * Stage aids rendered under the manual field — they pre-fill it, nothing
+   * more. See DemoShortcuts.
+   */
+  demoShortcuts?: DemoShortcut[];
 }
 
 type CameraState = 'idle' | 'starting' | 'active' | 'unsupported' | 'denied' | 'error';
@@ -39,8 +45,9 @@ declare global {
 const DETECT_FORMATS = ['code_128', 'code_39', 'ean_13', 'qr_code', 'data_matrix'];
 const POLL_MS = 250;
 
-export function Scanner({ instruction, manualLabel, manualPlaceholder, onDetect }: ScannerProps) {
+export function Scanner({ instruction, manualLabel, manualPlaceholder, onDetect, demoShortcuts }: ScannerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const manualInputRef = useRef<HTMLInputElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const stoppedRef = useRef(false);
   const [cameraState, setCameraState] = useState<CameraState>('idle');
@@ -214,6 +221,7 @@ export function Scanner({ instruction, manualLabel, manualPlaceholder, onDetect 
         <span style={{ font: 'var(--text-label)', color: 'var(--content-tertiary)' }}>{manualLabel}</span>
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <input
+            ref={manualInputRef}
             type="text"
             value={manualValue}
             onChange={(e) => setManualValue(e.target.value)}
@@ -236,6 +244,16 @@ export function Scanner({ instruction, manualLabel, manualPlaceholder, onDetect 
             Go
           </Button>
         </div>
+
+        {demoShortcuts && demoShortcuts.length > 0 && (
+          <DemoShortcuts
+            shortcuts={demoShortcuts}
+            onPick={(value) => {
+              setManualValue(value);
+              manualInputRef.current?.focus();
+            }}
+          />
+        )}
       </div>
     </div>
   );

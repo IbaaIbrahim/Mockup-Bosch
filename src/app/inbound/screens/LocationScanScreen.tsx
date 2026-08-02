@@ -14,8 +14,29 @@ import { useCallback, useEffect, useState } from 'react';
 import { Scanner } from '../../../design/components/Scanner';
 import { StateWash, ExpectedVsScanned } from '../../../design/components/StateWash';
 import { Chip } from '../../../design/components/Card';
+import type { DemoShortcut } from '../../../design/components/DemoShortcuts';
 
 type LocationType = 'RACK' | 'TROLLEY' | 'STAGING';
+
+/**
+ * A known rack that is never the proposal, so it produces a genuine MISMATCH
+ * (the C10 hard block) rather than the UNKNOWN_LOCATION screen — the demo
+ * needs expected-vs-scanned, not "code not recognised". RACK-A-04 is the
+ * standby for the vanishingly unlikely case that RACK-C-12 is the proposal.
+ */
+const WRONG_RACK = 'RACK-C-12';
+const WRONG_RACK_ALTERNATIVE = 'RACK-A-04';
+
+function locationExamples(proposedLocationId: string): DemoShortcut[] {
+  const wrong = proposedLocationId === WRONG_RACK ? WRONG_RACK_ALTERNATIVE : WRONG_RACK;
+  return [
+    { label: 'Wrong location', value: wrong, tone: 'unhappy' },
+    // Always the live proposal, so the button stays correct after a storage
+    // marks a rack occupied and the cascade moves on (npm run demo:reset puts
+    // it back to RACK-A-05).
+    { label: 'Correct location', value: proposedLocationId, tone: 'happy' },
+  ];
+}
 
 type VerifyResult =
   | { status: 'MATCH'; scanned: string; expected: string; message: string }
@@ -149,6 +170,7 @@ export function LocationScanScreen({
         manualLabel="Or enter the location code manually"
         manualPlaceholder={proposedLocationId}
         onDetect={verify}
+        demoShortcuts={locationExamples(proposedLocationId)}
       />
     </div>
   );

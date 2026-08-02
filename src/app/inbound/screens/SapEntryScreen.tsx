@@ -9,8 +9,20 @@
 import { useState } from 'react';
 import { Field } from '../../../design/components/Field';
 import { Button } from '../../../design/components/Button';
+import { DemoShortcuts, type DemoShortcut } from '../../../design/components/DemoShortcuts';
 
 const SAP_PO_LENGTH = 10;
+
+/**
+ * Stage aids — both are 10 digits, so both clear the field's own gate and are
+ * decided by the SAP adapter, not by the form. 1234567890 is absent from
+ * SAP_ORDERS → "PO number not found in SAP."; 4500987654 is the PDF's verbatim
+ * row → John Doe / MOE/LOG-A, which the cascade turns into RACK-A-05.
+ */
+const SAP_EXAMPLES: DemoShortcut[] = [
+  { label: 'PO not in SAP', value: '1234567890', tone: 'unhappy' },
+  { label: 'PO in SAP — John Doe', value: '4500987654', tone: 'happy' },
+];
 
 interface ResolvedRecipient {
   recipientName: string | null;
@@ -83,6 +95,14 @@ export function SapEntryScreen({
         }}
         counter={{ entered: digitsOnly.length, required: SAP_PO_LENGTH }}
         errorText={notFound ? 'PO number not found in SAP.' : undefined}
+      />
+
+      <DemoShortcuts
+        shortcuts={SAP_EXAMPLES}
+        onPick={(po) => {
+          setValue(po);
+          setNotFound(false);
+        }}
       />
 
       {notFound ? (
