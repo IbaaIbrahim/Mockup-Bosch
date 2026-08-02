@@ -1,0 +1,16 @@
+@import "../design/tokens.css";
+/*
+ * Automatic content detection is disabled (source(none)) and sources are
+ * registered explicitly. This project has no .git directory, and Tailwind
+ * v4's automatic heuristic — which normally excludes node_modules via
+ * .gitignore parsing — appears to depend on git tracking state to do that
+ * exclusion correctly. Without it, automatic detection scanned node_modules
+ * wholesale (visible as a large generic utility set with none of our actual
+ * responsive variants). Explicit @source paths sidestep the heuristic
+ * entirely and are deterministic regardless of git state.
+ */
+@import "tailwindcss" source(none);
+@source "./";
+@source "../design";
+@source "../hooks";
+@source "../lib";

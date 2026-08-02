@@ -1,0 +1,392 @@
+/**
+ * Bosch Shopfloor — design tokens.
+ *
+ * The single source of truth for colour, type, space, radius, elevation and
+ * motion. See docs/01-DESIGN-SYSTEM.md for the rationale behind each scale.
+ *
+ * HOUSE RULE: no component may contain a raw hex value, a raw px value in
+ * padding/margin/gap, or a raw duration. Tokens only. There is a lint rule.
+ *
+ * Import once, in the root layout, before Tailwind.
+ */
+
+:root {
+  /* ─── Brand ──────────────────────────────────────────────────────────── */
+  --bosch-red-50: #fff1f2;
+  --bosch-red-100: #ffe1e4;
+  --bosch-red-200: #ffc8ce;
+  --bosch-red-300: #ff9ba6;
+  --bosch-red-400: #fa5a6e;
+  --bosch-red-500: #e20015; /* Bosch Red — primary brand */
+  --bosch-red-600: #c4000f;
+  --bosch-red-700: #a00009;
+  --bosch-red-800: #7a0007;
+  --bosch-red-900: #520005;
+
+  /* Bosch secondary palette */
+  --bosch-blue-500: #007bc0;
+  --bosch-blue-600: #00629a;
+  --bosch-turquoise: #18837e;
+  --bosch-green-500: #00884a;
+  --bosch-green-600: #006b3a;
+  --bosch-yellow-500: #ffcf00;
+  --bosch-purple-500: #9e2896;
+
+  /* ─── Neutrals — cool grey, Bosch-aligned ────────────────────────────── */
+  --grey-0: #ffffff;
+  --grey-25: #fafbfc;
+  --grey-50: #f4f6f8;
+  --grey-100: #e9ecef;
+  --grey-200: #dbe0e5;
+  --grey-300: #c1c7cd;
+  --grey-400: #9aa3ac;
+  --grey-500: #71787e;
+  --grey-600: #545b62;
+  --grey-700: #3d4348;
+  --grey-800: #282d31;
+  --grey-900: #171a1c;
+  --grey-950: #0d0f10;
+
+  /* ─── Semantic: surfaces ─────────────────────────────────────────────── */
+  --surface-page: var(--grey-50);
+  --surface-raised: var(--grey-0);
+  --surface-sunken: var(--grey-100);
+  --surface-overlay: var(--grey-0);
+  --surface-inverse: var(--grey-900);
+  --surface-scrim: rgb(13 15 16 / 0.55);
+
+  /* ─── Semantic: content ──────────────────────────────────────────────── */
+  --content-primary: var(--grey-900);
+  --content-secondary: var(--grey-600);
+  --content-tertiary: var(--grey-400);
+  --content-inverse: var(--grey-0);
+  --content-brand: var(--bosch-red-500);
+  --content-link: var(--bosch-blue-600);
+
+  /* ─── Semantic: borders ──────────────────────────────────────────────── */
+  --border-subtle: var(--grey-200);
+  --border-default: var(--grey-300);
+  --border-strong: var(--grey-500);
+  --border-focus: var(--bosch-blue-500);
+
+  /* ─── Semantic: actions ──────────────────────────────────────────────── */
+  --action-primary-bg: var(--bosch-red-500);
+  --action-primary-bg-hover: var(--bosch-red-600);
+  --action-primary-bg-active: var(--bosch-red-700);
+  --action-primary-fg: var(--grey-0);
+  --action-secondary-bg: var(--grey-0);
+  --action-secondary-border: var(--grey-300);
+  --action-secondary-fg: var(--grey-900);
+  --action-disabled-bg: var(--grey-200);
+  --action-disabled-fg: var(--grey-400);
+
+  /* ─── Semantic: status ───────────────────────────────────────────────────
+   * The demo lives and dies here. PDF §3.2.2.1 requires the screen to turn red
+   * and green — we take that literally, as a full-viewport wash.
+   */
+  --status-success-bg: var(--bosch-green-500);
+  --status-success-surface: #e6f4ec;
+  --status-success-fg: var(--bosch-green-600);
+  --status-success-border: #9fd5b8;
+
+  --status-error-bg: var(--bosch-red-500);
+  --status-error-surface: var(--bosch-red-50);
+  --status-error-fg: var(--bosch-red-700);
+  --status-error-border: var(--bosch-red-200);
+
+  --status-warning-bg: var(--bosch-yellow-500);
+  --status-warning-surface: #fff8db;
+  --status-warning-fg: #6b5200;
+  --status-warning-border: #f2de8a;
+
+  --status-info-bg: var(--bosch-blue-500);
+  --status-info-surface: #e5f2f9;
+  --status-info-fg: var(--bosch-blue-600);
+  --status-info-border: #a8d3e9;
+
+  --status-neutral-surface: var(--grey-100);
+  --status-neutral-fg: var(--grey-600);
+
+  /* ─── Domain-specific ────────────────────────────────────────────────── */
+  --ai-accent: var(--bosch-purple-500);
+  --ai-surface: #f6eaf5;
+  --parcel-stored: var(--bosch-green-500);
+  --parcel-transit: var(--bosch-blue-500);
+  --parcel-delivered: var(--grey-500);
+
+  /* ─── Typography ─────────────────────────────────────────────────────────
+   * Monospace is used deliberately for machine-generated identifiers —
+   * tracking IDs, SAP POs, location IDs. It signals "this is data from a
+   * system" and makes character-level comparison possible, which matters when
+   * the operator is checking RACK-A-04 against RACK-A-05.
+   */
+  --font-sans: "Bosch Sans", "Inter var", Inter, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  --text-display: 700 2.5rem / 2.75rem var(--font-sans);
+  --text-h1: 700 1.875rem / 2.25rem var(--font-sans);
+  --text-h2: 600 1.5rem / 1.875rem var(--font-sans);
+  --text-h3: 600 1.25rem / 1.625rem var(--font-sans);
+  --text-body-lg: 400 1.1875rem / 1.75rem var(--font-sans);
+  --text-body: 400 1.0625rem / 1.625rem var(--font-sans);
+  --text-body-sm: 400 0.9375rem / 1.375rem var(--font-sans);
+  --text-label: 600 0.9375rem / 1.25rem var(--font-sans);
+  --text-caption: 500 0.8125rem / 1.125rem var(--font-sans);
+  --text-overline: 700 0.75rem / 1rem var(--font-sans);
+  --text-mono-lg: 500 1.375rem / 1.875rem var(--font-mono);
+  --text-mono: 500 0.9375rem / 1.375rem var(--font-mono);
+
+  --tracking-display: -0.02em;
+  --tracking-heading: -0.015em;
+  --tracking-overline: 0.08em;
+  --tracking-mono: 0.02em;
+
+  /* ─── Space — 4px base ───────────────────────────────────────────────── */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  --gutter-mobile: var(--space-5);
+  --gutter-tablet: var(--space-8);
+  --gutter-desktop: var(--space-10);
+
+  /* ─── Touch targets — built for gloves ───────────────────────────────── */
+  --target-min: 3.5rem; /* 56px — house minimum, above the 44px WCAG floor */
+  --target-primary: 4rem; /* 64px — the one action on the screen */
+  --target-compact: 3rem; /* 48px — ghost/tertiary only */
+
+  /* ─── Radius ─────────────────────────────────────────────────────────── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-full: 9999px;
+
+  /* ─── Elevation — soft, layered, never a hard drop shadow ────────────── */
+  --shadow-xs: 0 1px 2px rgb(13 15 16 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(13 15 16 / 0.07), 0 1px 2px rgb(13 15 16 / 0.04);
+  --shadow-md: 0 4px 12px rgb(13 15 16 / 0.08), 0 2px 4px rgb(13 15 16 / 0.04);
+  --shadow-lg: 0 12px 28px rgb(13 15 16 / 0.1), 0 4px 8px rgb(13 15 16 / 0.05);
+  --shadow-xl: 0 24px 48px rgb(13 15 16 / 0.14), 0 8px 16px rgb(13 15 16 / 0.06);
+  --shadow-focus: 0 0 0 3px rgb(0 123 192 / 0.35);
+
+  /* ─── Motion ─────────────────────────────────────────────────────────── */
+  --duration-instant: 90ms;
+  --duration-fast: 150ms;
+  --duration-moderate: 250ms;
+  --duration-slow: 400ms;
+  --duration-deliberate: 600ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Layers ─────────────────────────────────────────────────────────── */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-appbar: 20;
+  --z-footer: 30;
+  --z-scrim: 40;
+  --z-sheet: 50;
+  --z-wash: 60;
+  --z-toast: 70;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────
+ * Genuinely useful on a night shift, and a visible sign of product maturity.
+ * The dashboard is dark by default in Board mode on a wall display.
+ */
+[data-theme='dark'] {
+  --surface-page: var(--grey-950);
+  --surface-raised: var(--grey-900);
+  --surface-sunken: var(--grey-800);
+  --surface-overlay: var(--grey-800);
+  --surface-scrim: rgb(0 0 0 / 0.7);
+
+  --content-primary: var(--grey-50);
+  --content-secondary: var(--grey-400);
+  --content-tertiary: var(--grey-500);
+  --content-inverse: var(--grey-900);
+  --content-brand: var(--bosch-red-400); /* lifted for contrast on dark */
+  --content-link: #4aa8dc;
+
+  --border-subtle: var(--grey-800);
+  --border-default: var(--grey-700);
+  --border-strong: var(--grey-600);
+
+  --action-secondary-bg: var(--grey-800);
+  --action-secondary-border: var(--grey-700);
+  --action-secondary-fg: var(--grey-50);
+  --action-disabled-bg: var(--grey-800);
+  --action-disabled-fg: var(--grey-600);
+
+  --status-success-surface: #0c2a1b;
+  --status-success-fg: #5fd39a;
+  --status-error-surface: #2e0509;
+  --status-error-fg: #ff8f9c;
+  --status-warning-surface: #2b2205;
+  --status-warning-fg: #ffd84d;
+  --status-info-surface: #06222f;
+  --status-info-fg: #6cc3ea;
+  --status-neutral-surface: var(--grey-800);
+  --status-neutral-fg: var(--grey-400);
+
+  --ai-surface: #2a1428;
+
+  /* Shadows are invisible on near-black; hairlines carry elevation instead. */
+  --shadow-xs: 0 0 0 1px rgb(255 255 255 / 0.04);
+  --shadow-sm: 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-md: 0 0 0 1px rgb(255 255 255 / 0.08), 0 4px 12px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 0 0 1px rgb(255 255 255 / 0.1), 0 12px 28px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 0 0 1px rgb(255 255 255 / 0.12), 0 24px 48px rgb(0 0 0 / 0.6);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────── */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--surface-page);
+  color: var(--content-primary);
+  font: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Numerals align in tables, timers and counters. Non-negotiable for data. */
+table,
+[data-tabular],
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+code,
+kbd,
+samp,
+.mono {
+  font: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Full-screen state washes ─────────────────────────────────────────────
+ * PDF §3.2.2.1: "The screen turns red…" / "The screen turns green…"
+ * Implemented as a full-viewport layer, not a toast. One of the most memorable
+ * visual moments in the demo — treat it as a designed set piece.
+ */
+.state-wash {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-wash);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-8);
+  animation: wash-in var(--duration-moderate) var(--ease-out) both;
+}
+
+.state-wash--success {
+  background: var(--status-success-bg);
+  color: var(--grey-0);
+}
+
+.state-wash--error {
+  background: var(--status-error-bg);
+  color: var(--grey-0);
+}
+
+.state-wash--warning {
+  background: var(--status-warning-bg);
+  color: var(--grey-900);
+}
+
+@keyframes wash-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* The only looping animation permitted in the system. It earns its place by
+ * encoding "still moving" on IN_TRANSIT parcels. */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s var(--ease-in-out) infinite;
+}
+
+/* Decaying highlight on a newly arrived dashboard row — the moment a parcel
+ * registered on the phone lands on the projector (gate C16). */
+@keyframes row-arrive {
+  from {
+    background: var(--status-info-surface);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.row-arrive {
+  animation: row-arrive 1200ms var(--ease-out) both;
+}
+
+/* Button loading spinner. */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────
+ * Non-negotiable. Someone in the room will have this enabled.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--duration-fast) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--duration-fast) !important;
+    scroll-behavior: auto !important;
+  }
+
+  .state-wash {
+    animation: none;
+  }
+
+  .pulse-dot {
+    animation: none;
+  }
+}
