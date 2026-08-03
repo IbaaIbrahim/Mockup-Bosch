@@ -6,10 +6,8 @@
  */
 
 import { useCallback, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Scanner } from '../../../design/components/Scanner';
 import { StateWash } from '../../../design/components/StateWash';
-import { Button } from '../../../design/components/Button';
 import type { DemoShortcut } from '../../../design/components/DemoShortcuts';
 
 const CARRIERS = ['DHL', 'UPS', 'GLS', 'Amazon'];
@@ -41,7 +39,6 @@ export function ScanScreen({
 }: {
   onValidated: (trackingId: string, carrier: string) => void;
 }) {
-  const router = useRouter();
   const [result, setResult] = useState<ValidateResponse | null>(null);
   const [pending, setPending] = useState(false);
   const [registerAnywayError, setRegisterAnywayError] = useState<string | null>(null);
@@ -144,10 +141,6 @@ export function ScanScreen({
       />
 
       {pending && <span style={{ textAlign: 'center', color: 'var(--content-secondary)' }}>Checking…</span>}
-
-      <Button variant="ghost" onClick={() => router.push('/inbound/inbox')}>
-        View Inbox
-      </Button>
     </div>
   );
 }

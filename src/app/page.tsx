@@ -6,6 +6,7 @@ const LINKS = [
   { href: '/board', title: 'Parcel Status Dashboard', description: 'Dark card wall. Table and Mobile views via the switcher, top right.' },
   { href: '/inbound', title: 'Inbound Registration', description: 'Scan → identify → propose → verify → store.' },
   { href: '/ops', title: 'Ops Console', description: 'Event feed, health, admin, reset.' },
+  { href: '/inbound/inbox', title: 'Notification Inbox', description: 'Dispatched notifications, exactly as the recipient would receive them.' },
 ];
 
 export default function Home() {

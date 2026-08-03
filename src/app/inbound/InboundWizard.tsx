@@ -17,6 +17,7 @@ import { ProposalScreen } from './screens/ProposalScreen';
 import { LocationScanScreen } from './screens/LocationScanScreen';
 import { CompletionScreen } from './screens/CompletionScreen';
 import { newSessionId, type WizardData, type WizardStep } from './wizard-types';
+import { useDemoFrame } from '../../design/components/PhoneFrame';
 
 const STORAGE_KEY = 'bosch-inbound-wizard-v1';
 
@@ -49,6 +50,15 @@ export function InboundWizard() {
   const [data, setData] = useState<WizardData>(freshData);
   const [mismatchActive, setMismatchActive] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const { setHardBlocked } = useDemoFrame();
+
+  // Mirror the hard block up to the phone frame so it hides the footer Inbox
+  // link. C10 (docs/09 §5) pins the mismatch screen to *no* way forward but
+  // rescanning; a stray footer link is a navigation that test asserts to zero.
+  useEffect(() => {
+    setHardBlocked(mismatchActive);
+    return () => setHardBlocked(false);
+  }, [mismatchActive, setHardBlocked]);
 
   // Resume mid-flow after an accidental reload (docs/03-APP2-INBOUND.md §8).
   useEffect(() => {

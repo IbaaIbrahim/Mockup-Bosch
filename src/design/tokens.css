@@ -214,9 +214,21 @@
   --phone-frame-max-height: 54rem; /* 864px — caps the phone against small laptops */
   --phone-screen-width: 390px; /* App 2 design target is 360–430px */
   --phone-screen-radius: var(--radius-2xl);
-  --phone-frame-bezel: var(--grey-300);
-  --phone-frame-bg: var(--grey-100);
   --phone-frame-shadow: var(--shadow-xl);
+
+  /* Device chrome — the physical phone the demo shows on stage. The bezel is
+   * deliberately theme-independent (a real handset is always black), and the
+   * notch + home indicator overlay the app so the projector audience reads
+   * "a phone", not "a resized webpage". */
+  --device-bezel: #17191d;
+  --device-bezel-edge: rgb(255 255 255 / 0.12);
+  --device-notch: #000;
+  --device-notch-width: 6.5rem;
+  --device-notch-height: 1.375rem;
+  --device-home-indicator: rgb(255 255 255 / 0.92);
+  --device-home-width: 6rem;
+  --device-home-height: 0.3125rem;
+  --phone-frame-pad: 0.75rem;
 }
 
 /* ─── Dark mode ────────────────────────────────────────────────────────────
