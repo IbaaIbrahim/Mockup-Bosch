@@ -203,6 +203,20 @@
   --z-sheet: 50;
   --z-wash: 60;
   --z-toast: 70;
+
+  /* ─── Phone frame (demo device) ──────────────────────────────────────────
+   * The conference projector may be anything from 4k down to a 1024px laptop
+   * with a second display. The mobile surfaces must therefore render at a
+   * fixed phone size instead of stretching to the browser viewport. These
+   * tokens dimension the frame; the frame's screen re-bases position:fixed
+   * and the viewport-height units onto itself via CSS `contain`.
+   */
+  --phone-frame-max-height: 54rem; /* 864px — caps the phone against small laptops */
+  --phone-screen-width: 390px; /* App 2 design target is 360–430px */
+  --phone-screen-radius: var(--radius-2xl);
+  --phone-frame-bezel: var(--grey-300);
+  --phone-frame-bg: var(--grey-100);
+  --phone-frame-shadow: var(--shadow-xl);
 }
 
 /* ─── Dark mode ────────────────────────────────────────────────────────────

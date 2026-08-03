@@ -240,7 +240,9 @@ export function Scanner({ instruction, manualLabel, manualPlaceholder, onDetect,
               font: 'var(--text-mono)',
             }}
           />
-          <Button variant="secondary" onClick={submitManual} disabled={!manualValue.trim()} disabledReason="Enter a value first">
+          <Button variant="secondary" onClick={submitManual} disabled={!manualValue.trim()}
+          // disabledReason="Enter a value first"
+          >
             Go
           </Button>
         </div>

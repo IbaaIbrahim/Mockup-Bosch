@@ -40,7 +40,7 @@ export function MobileClient() {
   }, [refetch]);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--surface-page)', color: 'var(--content-primary)' }}>
+    <div style={{ minHeight: '100%', background: 'var(--surface-page)', color: 'var(--content-primary)' }}>
       <header
         style={{
           position: 'sticky',

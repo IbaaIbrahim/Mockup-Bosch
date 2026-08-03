@@ -126,7 +126,7 @@ export function InboundWizard() {
   const canGoBack = history.length > 0 && step !== 'COMPLETE' && !mismatchActive;
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--surface-page)' }}>
+    <div style={{ minHeight: '100%', display: 'flex', flexDirection: 'column', background: 'var(--surface-page)' }}>
       <AppBar title="Inbound Registration" onBack={canGoBack ? goBack : undefined} />
       {step !== 'COMPLETE' && (
         <div style={{ padding: 'var(--space-4) 0' }}>

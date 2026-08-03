@@ -93,7 +93,7 @@ export function DetailDrawer({ trackingId, onClose }: { trackingId: string; onCl
       <aside
         style={{
           position: 'relative',
-          width: 'min(28rem, 100vw)',
+          width: 'min(28rem, 100%)',
           height: '100%',
           background: 'var(--surface-raised)',
           borderLeft: '1px solid var(--border-subtle)',

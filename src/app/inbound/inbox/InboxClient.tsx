@@ -49,7 +49,7 @@ export function InboxClient() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--surface-page)' }}>
+    <div style={{ minHeight: '100%', background: 'var(--surface-page)' }}>
       <AppBar title="Inbox" onBack={() => router.push('/inbound')} />
       <div style={{ padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
         {!loading && emails.length === 0 && (
